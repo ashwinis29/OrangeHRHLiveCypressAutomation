@@ -1,0 +1,12 @@
+{
+  "addUser": {
+    "firstName": "Ashwini",
+    "lastName": "S",
+    "employeeName": "Ashwini S",
+    "userRole": "Admin",
+    "status": "Enabled",
+    "password": "Admin@876"
+  }
+}
+
+
