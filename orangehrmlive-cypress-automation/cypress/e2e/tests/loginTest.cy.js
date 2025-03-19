@@ -4,9 +4,15 @@ import LoginPage from '../../pages/LoginPage';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage';
 
 describe('OrangeHRM Login Page Test Cases', () => {
-    beforeEach(() => {
+    let userData;
+
+    beforeEach(function () {
+    cy.fixture('userData').then((data) => {
+        userData = data; //Store the fixture data in variables
         LoginPage.visitLoginPage();
     });
+    
+});
 
     it('Verify Website title ', () => {
         cy.title().should('eq','OrangeHRM');
@@ -25,17 +31,17 @@ describe('OrangeHRM Login Page Test Cases', () => {
     });
 
     it('should show error for invalid credentials (password)', () => {
-        LoginPage.login(login.adminUsername, 'invalidPwd');
+        LoginPage.login(login.adminUsername, userData.invalidLogin.invalidPassword);
         LoginPage.verifyErrorMessage('Invalid credentials');
     });
 
     it('should show error for invalid credentials (username)', () => {
-        LoginPage.login('invalidUser', login.adminPassword);
+        LoginPage.login(userData.invalidLogin.invalidUsername, login.adminPassword);
         LoginPage.verifyErrorMessage('Invalid credentials');
     });
 
     it('should show error for both invalid username and password credentials', () => {
-        LoginPage.login('invalidUser', 'invalidPass');
+        LoginPage.login(userData.invalidLogin.invalidUsername, userData.invalidLogin.invalidPassword);
         LoginPage.verifyErrorMessage('Invalid credentials');
     });
 
@@ -45,13 +51,13 @@ describe('OrangeHRM Login Page Test Cases', () => {
     });
 
     it('should show validation message for empty username field', () => {
-        cy.get(loginPage.passwordInput).type(login.adminPassword);
+        LoginPage.enterPassword(login.adminPassword);
         LoginPage.clickLogin();
         LoginPage.verifyRequiredFieldMessage();
     });
 
     it('should show validation message for empty password field', () => {
-        cy.get(loginPage.usernameInput).type(login.adminUsername);
+        LoginPage.enterUsername(login.adminUsername);
         LoginPage.clickLogin();
         LoginPage.verifyRequiredFieldMessage();
     });

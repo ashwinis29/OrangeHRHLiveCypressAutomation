@@ -8,15 +8,15 @@ class LoginPage {
     }
 
     static enterUsername(username) {
-        cy.get(loginPage.usernameInput).clear().type(username);
+        cy.get(loginPage.usernameInput, { timeout: 10000 }).clear().type(username);
     }
 
     static enterPassword(password) {
-        cy.get(loginPage.passwordInput).clear().type(password);
+        cy.get(loginPage.passwordInput, { timeout: 10000 }).clear().type(password);
     }
 
     static clickLogin() {
-        cy.get(loginPage.loginButton).click();
+        cy.get(loginPage.loginButton, { timeout: 10000 }).click();
     }
 
     static verifyErrorMessage(message) {
@@ -33,9 +33,9 @@ class LoginPage {
         this.clickLogin();
     }
     static verifySocialMediaLink(locator,origin,expectedUrl) {
-        cy.get(locator)
+        cy.get(locator, { timeout: 10000 })
         .should('be.visible')
-        .invoke('removeAttr', 'target') // Removes 'target=_blank' to stay in the same tab
+        .invoke('removeAttr', 'target') //Removes 'target=_blank' to stay in the same tab
         .click();
 
     cy.wait(2000);
@@ -59,7 +59,7 @@ class LoginPage {
     }
 
     static clickForgotPassword() {
-        cy.get(loginPage.forgotPassword).should('be.visible').click();
+        cy.get(loginPage.forgotPassword, { timeout: 10000 }).should('be.visible').click();
     }
 }
 

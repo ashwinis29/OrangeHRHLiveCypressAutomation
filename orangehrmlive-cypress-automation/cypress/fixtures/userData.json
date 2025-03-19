@@ -6,6 +6,10 @@
     "userRole": "Admin",
     "status": "Enabled",
     "password": "Admin@876"
+  },
+  "invalidLogin": {
+    "invalidUsername": "invalidUser",
+    "invalidPassword": "invalidPass"
   }
 }
 
